@@ -127,6 +127,9 @@ Open a new, separate terminal window (leave the backend terminal running in the 
 # 1. Navigate to the frontend directory
 cd src/frontend
 
+# Copy the example environment file to create your own .env file
+cp .env.example .env
+
 # 2. Install frontend dependencies
 npm install
 
