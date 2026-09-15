@@ -6,25 +6,25 @@
 
 Before you begin, ensure you have the following installed:
 
-- [ ] [e.g., Python 3.11+]
-- [ ] [e.g., Node.js 18+]
-- [ ] [e.g., Docker Desktop]
-- [ ] [e.g., An IBM Cloud account with watsonx.ai access]
+- [Python 3.11+]
+- [Node.js 18+]
+
+## Obtain API Keys (Free)
+
+The system relies on two external APIs. **If you skip this step, the system will automatically fall back to an offline mock data generator, and all UI features will still work.**
+1. **OpenSky Network:** Sign up at [OpenSky Network](https://opensky-network.org/my-opensky/account) to obtain your `Client ID` and `Client Secret` (OAuth2 Credentials).
+2. **OpenWeatherMap:** Sign up at [OpenWeatherMap](https://home.openweathermap.org/api_keys) and generate an `API Key`.
 
 ## Environment Variables
 
-Copy `.env.example` to `.env` and fill in the values:
+1. Navigate to the `src` folder in the project.
+2. Duplicate/copy the `.env.example` file and rename the new file to `.env`.
+3. Open `src/.env` in a text editor and fill in your newly generated API keys:
 
-```bash
-cp .env.example .env
-```
-
-| Variable | Description | Required |
-|---|---|---|
-| `WATSONX_API_KEY` | Your IBM watsonx.ai API key | Yes |
-| `WATSONX_PROJECT_ID` | Your watsonx.ai project ID | Yes |
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
-| `SLACK_WEBHOOK_URL` | Slack webhook for alerts | No |
+```env
+OPENSKY_CLIENT_ID="your_real_client_id"
+OPENSKY_CLIENT_SECRET="your_real_client_secret"
+OPENWEATHER_API_KEY="your_real_api_key"
 
 ## Installation
 
@@ -32,48 +32,48 @@ cp .env.example .env
 # 1. Clone the repository
 git clone https://github.com/[your-org]/[your-repo].git
 cd [your-repo]
-
-# 2. Install backend dependencies
-[your command — e.g.: pip install -r requirements.txt]
-
-# 3. Install frontend dependencies (if applicable)
-[your command — e.g.: cd frontend && npm install]
-
-# 4. Set up the database (if applicable)
-[your command — e.g.: python manage.py migrate]
 ```
-
-## Running the Application
+## Set up the Backend
+Open a terminal and run the following commands to configure and start the backend:
 
 ```bash
-# Start the backend
-[your command — e.g.: uvicorn app.main:app --reload]
+# 1. Navigate to the backend directory
+cd src/backend
 
-# Start the frontend (in a separate terminal, if applicable)
-[your command — e.g.: cd frontend && npm run dev]
+# 2. Create a virtual environment
+python -m venv .venv
+
+# 3. Activate the virtual environment (Windows)
+.venv\Scripts\activate
+# (Note: For macOS/Linux, use: source .venv/bin/activate)
+
+# 4. Install backend dependencies
+pip install -r requirements.txt
+
+# 5. Start the backend server
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
-
-The application will be available at: `http://localhost:[PORT]`
-
-## Running Tests
-
+**Verify it works:** Open http://localhost:8000/health in your browser. You should see a JSON status response indicating the system is healthy.
+## Set up the Frontend
+Open a new, separate terminal window (leave the backend terminal running in the background) and run the following commands:
 ```bash
-[your test command — e.g.: pytest tests/ -v]
+# 1. Navigate to the frontend directory
+cd src/frontend
+
+# 2. Install frontend dependencies
+npm install
+
+# 3. Start the frontend development server
+npm run dev
 ```
+## Access the Dashboard
+Open your web browser and navigate to: http://localhost:3000
 
-## Quick Demo (Optional)
-
-If you have a demo script or sample data to showcase the project quickly:
-
-```bash
-[e.g.: python demo/seed_demo_data.py]
-[e.g.: open http://localhost:8000/demo]
-```
+The system will automatically establish a WebSocket connection with the backend, load the dark-mode ATC Tactical Display, and begin streaming live airborne telemetry!
 
 ## Troubleshooting
 
 | Issue | Solution |
 |---|---|
-| [e.g., `ModuleNotFoundError`] | [e.g., Run `pip install -r requirements.txt` again] |
-| [e.g., Database connection refused] | [e.g., Ensure PostgreSQL is running: `docker compose up db`] |
-| [e.g., watsonx.ai 401 error] | [e.g., Check `WATSONX_API_KEY` in your `.env` file] |
+| `Virtual environment fails to activate` | On macOS or Linux, ensure you are using source .venv/bin/activate instead of the .venv\\Scripts\\activate command intended for Windows. |
+| `Missing live data on the UI` | Ensure you have correctly registered at OpenSky Network and OpenWeatherMap, and that your API keys are placed in src/.env. If missing, the app safely falls back to a mock data generator and all UI features will still work. |
