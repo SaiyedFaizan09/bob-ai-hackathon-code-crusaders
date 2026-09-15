@@ -21,7 +21,6 @@ flowchart LR
     B[OpenWeatherMap] -->|Weather Data| C
     C -->|Physics Engine| D{Collision Detection}
     D -->|WebSockets| E[React/Vite Tactical Map]
-    C <-->|Data Orchestration| F[IBM Bob]
 ```
 
 ## Key Design Decisions
@@ -35,4 +34,4 @@ flowchart LR
 
 ## IBM Technologies Used
 
-- **IBM Bob:** Used as a scalable orchestration layer to help manage and route the high-frequency telemetry data streams. By offloading connection health checks and initial payload routing to IBM Bob, we ensured our FastAPI backend could dedicate its primary compute resources entirely to the mathematically intensive collision prediction engine.
+- **IBM Bob:** Used exclusively during the development phase as an intelligent assistant for code review and debugging. We leveraged it to help identify complex logic edge-cases within our mathematics engine and to troubleshoot WebSocket latency issues, ensuring the system was highly performant before deployment.
