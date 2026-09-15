@@ -1,0 +1,79 @@
+# =============================================================================
+# HACKATHON SUBMISSION METADATA
+# =============================================================================
+# Instructions:
+#   - Fill in ALL required fields (marked with # REQUIRED)
+#   - Optional fields can be left as empty strings ""
+#   - Do NOT rename this file — the evaluation pipeline reads it by name
+#   - Use double quotes around all string values
+# =============================================================================
+
+team:
+  name: "Code Crusaders"                             # REQUIRED — e.g., "Orion Squad"
+  track: "Open"                            # REQUIRED — one of: AI | DevOps | Sustainability | Open
+  lead:
+    name: "SAIYED MOHAMMED FAIZAN SOHIL ALI"                           # REQUIRED — e.g., "Alice Chen"
+    email: "24dcs112@charusat.edu.in"                          # REQUIRED — e.g., "alice.chen@ibm.com"
+  members:
+    - name: "PUNVAR HARSHRAJ PRADIPSINH"                         # REQUIRED — Team member 1
+      email: "24dcs104@charusat.edu.in"
+    - name: "SAGAR HET BHARATKUMAR"                         # Add more members by copying the two lines above
+      email: "24dcs111@charusat.edu.in"
+    - name: "SHAH MANAN MITTALKUMAR"
+      email: "24dcs118@charusat.edu.in"
+
+submission:
+  title: "ATC OMNI-ZONE TERMINAL SAFETY SYSTEM"                            # REQUIRED — Project display name, e.g., "SmartOps Dashboard"
+
+  problem_statement: >                 # REQUIRED — 1-3 sentences. What problem? Who has it?
+    Air traffic controllers must manually predict future positions of aircraft in
+    crowded terminal airspace while also monitoring runway traffic, creating a high
+    cognitive workload and increasing the risk of mid-air collisions and runway incursions.
+
+  solution_summary: >                  # REQUIRED — 1-3 sentences. What did you build?
+    We built a real-time ATC safety dashboard that ingests ADS-B telemetry and
+    weather data, predicts airborne and ground conflicts with a physics-based engine,
+    and streams actionable alerts to a React tactical map.
+
+  key_features:                        # REQUIRED — List 3 to 5 specific features you implemented
+    - "60-second airborne time-to-closest-approach detection using cylindrical separation thresholds"                               # e.g., "Real-time pipeline anomaly detection using watsonx.ai"
+    - "Weather-aware ground stopping-distance envelopes and runway incursion detection"
+    - "Real-time WebSocket telemetry streaming with cached 2-second broadcasts"
+    - "React-Leaflet tactical map with 50 km geofence, runway geometry, trajectories, and P-E-R aircraft highlighting"                               # optional 4th
+    - "Resolution advisories, countdown timers, aircraft search, and detailed telemetry inspection"                               # optional 5th
+
+  tech_stack:
+    languages: ["Python", "TypeScript"]                      # REQUIRED — e.g., ["Python", "TypeScript"]
+    frameworks: ["FastAPI", "React", "Vite", "React-Leaflet"]                     # e.g., ["FastAPI", "React"]
+    ibm_technologies: ["IBM Bob"]               # e.g., ["watsonx.ai", "IBM Bob", "IBM Cloud Functions"]
+    databases: []                      # e.g., ["PostgreSQL", "Redis"]
+    other: ["OpenSky Network ADS-B API", "OpenWeatherMap API", "WebSockets", "Leaflet", "httpx"]                          # e.g., ["Docker", "GitHub Actions", "Slack API"]
+
+  what_we_are_most_proud_of: >         # Optional but recommended — guides judges to your best work
+    The strongest part of the project is the pure-mathematics collision engine.
+    It separates horizontal and vertical airborne safety checks, models realistic
+    forward stopping envelopes for ground traffic, uses runway line-segment
+    geometry, and produces actionable resolution advisories rather than generic
+    warnings.
+
+  known_limitations: >                 # Optional but recommended — be honest about gaps
+    The system depends on external OpenSky Network and OpenWeatherMap APIs, which
+    have daily request limits and may experience rate limiting or temporary
+    unavailability. To conserve quota, ADS-B data is fetched every 120 seconds and
+    weather data is cached for 300 seconds, while the dashboard continues serving
+    cached telemetry through the WebSocket stream every 2 seconds. When credentials
+    are unavailable or an API request fails, the system uses deterministic mock
+    aircraft data and default weather values for demonstration purposes.
+
+# =============================================================================
+# ARTIFACT LOCATIONS
+# These paths are relative to the repo root. Only change if you moved files.
+# =============================================================================
+artifacts:
+  source_code: "src/"
+  setup_guide: "docs/setup-guide.md"
+  architecture_doc: "docs/architecture.md"
+  demo_video: "demo/demo-video-link.txt"   # URL to hosted video (YouTube, Loom, Box)
+  live_demo: "demo/live-demo-url.txt"      # URL to deployed demo (optional)
+  screenshots: "demo/screenshots/"
+  presentation: "presentation/"
