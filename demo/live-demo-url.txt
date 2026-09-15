@@ -1,4 +1,4 @@
-https://your-live-demo-url-here.com
+NOT DEPLOYED — run locally using docs/setup-guide.md
 
 Replace the URL above with a link to your live/deployed demo.
 
