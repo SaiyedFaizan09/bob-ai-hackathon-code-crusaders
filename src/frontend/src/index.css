@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+/* ================================================================
+   ATC TACTICAL DISPLAY — Global Styles
+   Dark-mode aviation aesthetic
+   ================================================================ */
+
+:root {
+  /* Aviation color palette */
+  --color-bg-primary:    #020817;
+  --color-bg-surface:    #0a1628;
+  --color-bg-panel:      #0f1f35;
+  --color-bg-card:       #132540;
+
+  --color-cyan:          #00d4ff;
+  --color-cyan-dim:      #00aacc;
+  --color-emerald:       #00ff88;
+  --color-emerald-dim:   #00cc6a;
+  --color-amber:         #ffbb00;
+  --color-red-alert:     #ff2244;
+  --color-red-pulse:     #ff0030;
+
+  --color-text-primary:  #e2eaf7;
+  --color-text-secondary:#7fa8d0;
+  --color-text-dim:      #4a6280;
+
+  --color-border:        #1a3050;
+  --color-border-bright: #234060;
+
+  /* Glow effects */
+  --glow-cyan:   0 0 12px rgba(0,212,255,0.5), 0 0 30px rgba(0,212,255,0.2);
+  --glow-red:    0 0 16px rgba(255,34,68,0.7),  0 0 40px rgba(255,34,68,0.3);
+  --glow-emerald:0 0 12px rgba(0,255,136,0.5), 0 0 30px rgba(0,255,136,0.2);
+
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  overflow: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar        { width: 4px; height: 4px; }
+::-webkit-scrollbar-track  { background: var(--color-bg-surface); }
+::-webkit-scrollbar-thumb  { background: var(--color-border-bright); border-radius: 2px; }
+
+/* Leaflet overrides */
+.leaflet-container {
+  background: #020817 !important;
+  font-family: 'Inter', sans-serif;
+}
+.leaflet-control-zoom {
+  border: 1px solid var(--color-border) !important;
+  background: var(--color-bg-panel) !important;
+}
+.leaflet-control-zoom a {
+  background: var(--color-bg-panel) !important;
+  color: var(--color-cyan) !important;
+  border-color: var(--color-border) !important;
+}
+.leaflet-control-zoom a:hover {
+  background: var(--color-bg-card) !important;
+}
+
+/* ================================================================
+   P-E-R (Preemptive-Event-Red) pulsing animation
+   ================================================================ */
+@keyframes per-pulse {
+  0%, 100% {
+    box-shadow: var(--glow-red);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255,34,68,0.9), 0 0 60px rgba(255,34,68,0.5);
+    opacity: 0.85;
+  }
+}
+
+@keyframes per-ring-expand {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0;   }
+}
+
+@keyframes badge-appear {
+  from { transform: scale(0.8) translateY(-4px); opacity: 0; }
+  to   { transform: scale(1)   translateY(0);    opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+@keyframes countdown-tick {
+  0%   { color: var(--color-red-alert); }
+  50%  { color: #ff6680; }
+  100% { color: var(--color-red-alert); }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ================================================================
+   Utility classes
+   ================================================================ */
+.font-mono    { font-family: 'JetBrains Mono', monospace; }
+.text-cyan    { color: var(--color-cyan); }
+.text-emerald { color: var(--color-emerald); }
+.text-amber   { color: var(--color-amber); }
+.text-red-alert { color: var(--color-red-alert); }
+.glow-cyan    { text-shadow: var(--glow-cyan); }
+.glow-red     { text-shadow: var(--glow-red); }
+
+.glass-panel {
+  background: rgba(13, 25, 50, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.glass-panel-bright {
+  background: rgba(15, 31, 53, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border-bright);
+  border-radius: 8px;
+}
+
+.per-active {
+  animation: per-pulse 1.2s ease-in-out infinite;
+  border-color: var(--color-red-alert) !important;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot.online  { background: var(--color-emerald); animation: blink 2s infinite; }
+.status-dot.warning { background: var(--color-amber);   animation: blink 1s infinite; }
+.status-dot.offline { background: var(--color-red-alert); }
+.status-dot.mock    { background: var(--color-amber);   }
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border-bright), transparent);
+}

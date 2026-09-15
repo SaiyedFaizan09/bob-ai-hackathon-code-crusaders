@@ -1,0 +1,122 @@
+{
+    "DEL": {
+        "icao": "VIDP",
+        "iata": "DEL",
+        "name": "Indira Gandhi International Airport",
+        "city": "New Delhi",
+        "center": {
+            "latitude": 28.5562,
+            "longitude": 77.1000,
+            "elevation_m": 237
+        },
+        "geofence_radius_km": 50.0,
+        "runways": [
+            {
+                "id": "09/27",
+                "coordinates": [
+                    [28.5710, 77.0895],
+                    [28.5704, 77.1152],
+                    [28.5694, 77.1151],
+                    [28.5700, 77.0894]
+                ]
+            },
+            {
+                "id": "10/28",
+                "coordinates": [
+                    [28.5677, 77.0846],
+                    [28.5592, 77.1224],
+                    [28.5582, 77.1222],
+                    [28.5667, 77.0844]
+                ]
+            },
+            {
+                "id": "11L/29R",
+                "coordinates": [
+                    [28.5506, 77.0681],
+                    [28.5413, 77.1118],
+                    [28.5403, 77.1116],
+                    [28.5496, 77.0679]
+                ]
+            },
+            {
+                "id": "11R/29L",
+                "coordinates": [
+                    [28.5477, 77.0654],
+                    [28.5382, 77.1094],
+                    [28.5372, 77.1092],
+                    [28.5467, 77.0652]
+                ]
+            }
+        ]
+    },
+    "AMD": {
+        "icao": "VAAH",
+        "iata": "AMD",
+        "name": "Sardar Vallabhbhai Patel International Airport",
+        "city": "Ahmedabad",
+        "center": {
+            "latitude": 23.0772,
+            "longitude": 72.6347,
+            "elevation_m": 58
+        },
+        "geofence_radius_km": 50.0,
+        "runways": [
+            {
+                "id": "05/23",
+                "coordinates": [
+                    [
+                        23.0640,
+                        72.6240
+                    ],
+                    [
+                        23.0850,
+                        72.6410
+                    ],
+                    [
+                        23.0830,
+                        72.6430
+                    ],
+                    [
+                        23.0620,
+                        72.6260
+                    ]
+                ]
+            }
+        ]
+    },
+    "BDQ": {
+        "icao": "VABO",
+        "iata": "BDQ",
+        "name": "Vadodara Airport (Civil Airport Harni)",
+        "city": "Vadodara",
+        "center": {
+            "latitude": 22.3361,
+            "longitude": 73.2263,
+            "elevation_m": 39
+        },
+        "geofence_radius_km": 30.0,
+        "runways": [
+            {
+                "id": "04/22",
+                "coordinates": [
+                    [
+                        22.3290,
+                        73.2210
+                    ],
+                    [
+                        22.3420,
+                        73.2320
+                    ],
+                    [
+                        22.3400,
+                        73.2340
+                    ],
+                    [
+                        22.3270,
+                        73.2230
+                    ]
+                ]
+            }
+        ]
+    }
+}
