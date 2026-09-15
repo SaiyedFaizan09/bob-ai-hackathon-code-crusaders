@@ -9,7 +9,7 @@
 | **Team Name** | Code Crusaders |
 | **Track** | Open |
 | **Team Lead** | SAIYED MOHAMMED FAIZAN SOHIL ALI — 24dcs112@charusat.edu.in |
-| **Members** | PUNVAR HARSHRAJ PRADIPSINH , SAGAR HET BHARATKUMAR , SHAH MANAN MITTALKUMAR |
+| **Members** | PUNVAR HARSHRAJ PRADIPSINH , SAGAR HET BHARATKUMAR , SHAH MANAN MITTALBHAI |
 
 ---
 
