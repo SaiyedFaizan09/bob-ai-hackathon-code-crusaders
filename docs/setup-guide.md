@@ -1,7 +1,5 @@
 # Setup Guide
 
-> **This file is read by the automated evaluation pipeline. Be precise and complete.**
-
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
