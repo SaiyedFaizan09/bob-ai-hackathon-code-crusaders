@@ -94,8 +94,8 @@ OPENWEATHER_API_KEY="your_real_api_key"
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/[your-org]/[your-repo].git
-cd [your-repo]
+git clone https://github.com/SaiyedFaizan09/bob-ai-hackathon-code-crusaders.git
+cd bob-ai-hackathon-code-crusaders
 ```
 ### Set up the Backend
 
