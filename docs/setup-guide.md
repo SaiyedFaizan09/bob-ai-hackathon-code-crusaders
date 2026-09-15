@@ -20,12 +20,11 @@ The system relies on two external APIs. **If you skip this step, the system will
 1. Navigate to the `src` folder in the project.
 2. Duplicate/copy the `.env.example` file and rename the new file to `.env`.
 3. Open `src/.env` in a text editor and fill in your newly generated API keys:
-
-```env
+```bash
 OPENSKY_CLIENT_ID="your_real_client_id"
 OPENSKY_CLIENT_SECRET="your_real_client_secret"
 OPENWEATHER_API_KEY="your_real_api_key"
-
+```
 ## Installation
 
 ```bash
@@ -34,6 +33,7 @@ git clone https://github.com/[your-org]/[your-repo].git
 cd [your-repo]
 ```
 ## Set up the Backend
+
 Open a terminal and run the following commands to configure and start the backend:
 
 ```bash
@@ -54,7 +54,9 @@ pip install -r requirements.txt
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 **Verify it works:** Open http://localhost:8000/health in your browser. You should see a JSON status response indicating the system is healthy.
+
 ## Set up the Frontend
+
 Open a new, separate terminal window (leave the backend terminal running in the background) and run the following commands:
 ```bash
 # 1. Navigate to the frontend directory
@@ -67,6 +69,7 @@ npm install
 npm run dev
 ```
 ## Access the Dashboard
+
 Open your web browser and navigate to: http://localhost:3000
 
 The system will automatically establish a WebSocket connection with the backend, load the dark-mode ATC Tactical Display, and begin streaming live airborne telemetry!
