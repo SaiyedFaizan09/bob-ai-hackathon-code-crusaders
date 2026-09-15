@@ -2,40 +2,37 @@
 
 ## What We Built
 
-[Describe your solution in plain language. Avoid jargon — write as if explaining to a smart colleague unfamiliar with your tech stack.]
+We built a real-time Air Traffic Control (ATC) safety dashboard designed to proactively prevent collisions. It ingests live flight telemetry and weather data, processes it through a custom physics-based collision engine, and streams actionable alerts to a live tactical map. Rather than just displaying current aircraft positions, the system predicts future conflicts for both airborne and ground traffic, providing controllers with critical lead time and clear resolution advisories to manage crowded airspace safely.
 
 ## How It Works
 
-[Explain the core mechanism step by step. A numbered list or simple flow works well here.]
-
-1. [Step 1: e.g., "User connects their GitHub repository via OAuth"]
-2. [Step 2: e.g., "The system ingests pipeline logs and feeds them to watsonx.ai"]
-3. [Step 3: e.g., "An anomaly score is computed and displayed on the dashboard"]
-4. [Step 4: e.g., "Alerts are sent to Slack when the score exceeds a threshold"]
+1. **Data Ingestion:** The FastAPI backend securely fetches live aircraft positions (via OpenSky Network ADS-B) and local weather conditions (via OpenWeatherMap) every two seconds.
+2. **Conflict Prediction:** Our pure-mathematics collision engine evaluates the data, calculating a 60-second time-to-closest-approach for airborne traffic (using cylindrical separation) and modeling weather-adjusted forward stopping envelopes for ground traffic.
+3. **Live Streaming:** The processed airspace state, complete with generated resolution advisories and countdown timers, is cached and continuously broadcast via WebSockets.
+4. **Tactical Visualization:** A React-Leaflet frontend renders a 50 km geofenced airspace and runway line-segment geometry. Aircraft are dynamically highlighted based on threat levels, presenting actionable alerts directly to the controller.
 
 ## Architecture Diagram
 
 > See [`architecture.md`](architecture.md) for the detailed diagram.
 
-[Optionally include a simple ASCII or Mermaid diagram here for quick reference.]
-
-```
-[User] → [Frontend: React] → [API: FastAPI] → [watsonx.ai] → [Dashboard]
-                                    ↓
-                             [PostgreSQL DB]
+```mermaid
+flowchart LR
+    A[OpenSky ADS-B] -->|Live Telemetry| C(FastAPI Backend)
+    B[OpenWeatherMap] -->|Weather Data| C
+    C -->|Physics Engine| D{Collision Detection}
+    D -->|WebSockets| E[React/Vite Tactical Map]
+    C <-->|Data Orchestration| F[IBM Bob]
 ```
 
 ## Key Design Decisions
 
 | Decision | Rationale |
 |---|---|
-| [e.g., Used watsonx.ai for anomaly detection] | [e.g., Pre-trained models reduced time-to-value vs. building from scratch] |
-| [Decision 2] | [Rationale 2] |
-| [Decision 3] | [Rationale 3] |
+| **Pure-Mathematics Collision Engine** | Opted for a deterministic physics model rather than machine learning to ensure highly predictable, transparent, and immediate conflict calculations. |
+| **WebSocket Telemetry Streaming** | Standard HTTP polling caused too much latency for live ATC operations; WebSockets with a 2-second cached broadcast provided the necessary real-time fluidity. |
+| **Separate Horizontal & Vertical Checks** | Modeled airborne safety using cylindrical thresholds rather than spherical ones to accurately reflect real-world aviation altitude and distance separation standards. |
+| **In-Memory Caching** | Used in-memory data structures for active flight states and JSON airport configurations to minimize read/write latency during rapid update cycles. |
 
 ## IBM Technologies Used
 
-[Explain specifically HOW you used each IBM technology — not just that you used it.]
-
-- **[IBM Tech 1, e.g., watsonx.ai]:** [How it was used — e.g., "Used the `ibm/granite-13b-instruct-v2` model via the Python SDK to classify anomaly types from log text."]
-- **[IBM Tech 2]:** [How it was used]
+- **IBM Bob:** Used as a scalable orchestration layer to help manage and route the high-frequency telemetry data streams. By offloading connection health checks and initial payload routing to IBM Bob, we ensured our FastAPI backend could dedicate its primary compute resources entirely to the mathematically intensive collision prediction engine.
